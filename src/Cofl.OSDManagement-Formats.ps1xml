@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>OSDComputer</Name>
+            <ViewSelectedBy>
+                <TypeName>OSDComputer</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader/> <!-- Asset Tag -->
+                    <TableColumnHeader/> <!-- ComputerName -->
+                    <TableColumnHeader/> <!-- TaskSequence -->
+                    <TableColumnHeader/> <!-- IsADComputerPresent -->
+                    <TableColumnHeader>  <!-- MacAddress -->
+                        <Label>MacAddress</Label>
+                        <Width>18</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader/> <!-- IsStaged -->
+                    <TableColumnHeader/> <!-- IsInDefaultOU -->
+                    <TableColumnHeader>  <!-- UUID -->
+                        <Label>UUID</Label>
+                        <Width>36</Width>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>AssetTag</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ComputerName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>TaskSequence</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>IsADComputerPresent</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                    if($null -ne $_.MacAddress) { [string]::Format('{0:X2}:{1:X2}:{2:X2}:{3:X2}:{4:X2}:{5:X2}', [object[]]$MacAddress.GetAddressBytes()) }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>IsStaged</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>IsInDefaultOU</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                    "$(if($_.UUID -ne [guid]::Empty) { $_.UUID })"
+                                </ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <View>
+            <Name>OSDTaskSequenceGroup</Name>
+            <ViewSelectedBy>
+                <TypeName>OSDTaskSequenceGroup</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader/> <!-- Name -->
+                    <TableColumnHeader/> <!-- Enabled -->
+                    <TableColumnHeader/> <!-- Members -->
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>Name</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Enabled</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Members</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <View>
+            <Name>OSDTaskSequence</Name>
+            <ViewSelectedBy>
+                <TypeName>OSDTaskSequence</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader/> <!-- ID -->
+                    <TableColumnHeader/> <!-- Name -->
+                    <TableColumnHeader/> <!-- Group -->
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>ID</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Name</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Group</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <View>
+            <Name>OSDMakeModel</Name>
+            <ViewSelectedBy>
+                <TypeName>OSDMakeModel</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader/> <!-- Make -->
+                    <TableColumnHeader/> <!-- Model -->
+                    <TableColumnHeader/> <!-- TaskSequence -->
+                    <TableColumnHeader/> <!-- Driver Group -->
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>Make</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Model</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>TaskSequence</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>DriverGroup</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

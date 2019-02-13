@@ -1,0 +1,17 @@
+root = true
+
+[*]
+insert_final_newline = true
+indent_style = space
+charset = utf-8
+end_of_line = lf
+
+[AUTHORS]
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.ps{,m,d}1]
+indent_size = 4
+trim_trailing_whitespace = true
