@@ -114,7 +114,7 @@ Task GenerateHelpFiles -requiredVariables DocsRoot, ModuleName, ModuleOutDir, Ou
 
 Task Analyze -depends Build -requiredVariables ModuleOutDir {
     if(!(Get-Module PSScriptAnalyzer -ListAvailable)){
-        throw "$($psake.context.currentTaskName) - PSScriptAnalyzer is not availalbe, cannot analyze module."
+        throw "$($psake.context.currentTaskName) - PSScriptAnalyzer is not available, cannot analyze module."
     } else {
         Import-Module PSScriptAnalyzer
     }
@@ -139,7 +139,7 @@ Task Sign -depends Catalog -requiredVariables ModuleCatalogPath, Certificate {
     }
 }
 
-Task Deploy -depends Build, Sign, Analyze, BuildHelp {
+Task Deploy -depends Build, Analyze, BuildHelp {
     if(!(Get-Module PSDeploy -ListAvailable)){
         throw "$(psake.context.currentTaskName) - PSDeploy is not available, cannot deploy."
     } else {

@@ -40,10 +40,14 @@ function Reset-OSDComputer
 
     process
     {
-        foreach($Computer in $Identity)
+        [OSDComputer[]]$ComputerIdentities = Resolve-OSDComputerBinding -Bindings $Identity
+        foreach($ComputerObject in $ComputerIdentities)
         {
-            # Delegate to Set-OSDComputer because it already has the logic for guaranteeing things go well.
-            Set-OSDComputer -Identity $Computer -Clear $Property -PassThru:$PassThru -Verbose:$VerbosePreference
+            if($PSCmdlet.ShouldProcess($ComputerObject.ComputerName, "Update the computer's settings."))
+            {
+                # Delegate to Set-OSDComputer because it already has the logic for guaranteeing things go well.
+                Set-OSDComputer -Identity $ComputerObject -Clear $Property -PassThru:$PassThru -Verbose:$VerbosePreference -Confirm:$false
+            }
         }
     }
 }
