@@ -19,11 +19,7 @@ For more information, please visit the README on the project page.
             ModuleVersion = '1.3'
             Guid = 'e56e5bec-4d97-4dfd-b138-abbaa14464a6'
         },
-        @{
-            ModuleName = 'ActiveDirectory'
-            ModuleVersion = '1.0'
-            Guid = '43c15630-959c-49e4-a977-758c5cc93408'
-        }
+        'ActiveDirectory'
     )
     FunctionsToExport = @(
         'Get-OSDComputer'
