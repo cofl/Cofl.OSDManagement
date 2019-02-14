@@ -112,14 +112,16 @@ Task GenerateHelpFiles -requiredVariables DocsRoot, ModuleName, ModuleOutDir, Ou
     }
 }
 
-Task Analyze -depends Build -requiredVariables ModuleOutDir {
+Task Analyze -depends Build -requiredVariables ModuleOutDir,ModuleName {
     if(!(Get-Module PSScriptAnalyzer -ListAvailable)){
         throw "$($psake.context.currentTaskName) - PSScriptAnalyzer is not available, cannot analyze module."
     } else {
         Import-Module PSScriptAnalyzer
     }
 
+    Import-Module "$ModuleOutDir/$ModuleName.psd1" -Force
     Invoke-ScriptAnalyzer -Path $ModuleOutDir -Recurse -Settings PSGallery | Tee-Object -Variable Analysis
+    Remove-Module $ModuleName -Force
     if($Analysis)
     {
         throw "$($psake.context.currentTaskName) - Analysis failed."

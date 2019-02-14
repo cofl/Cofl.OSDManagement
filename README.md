@@ -1,12 +1,12 @@
 The Cofl.OSDManagment module for Windows Powershell allows the management of computers in an MDT/Active Directory system coupled with a WDS server set to use Active Directory authorization, and an MSSQL server running the MDT Database.
 
-It has been tested on MDT versions 8443 and 8450.
+It has been (loosely) tested on MDT versions 8443 and 8450.
 
 ## Setup
 1. Have a functioning MDT environment with a database configured.
 2. Have an ActiveDirectory domain and access to create, read, and write in that domain or the subset of it you'll be using.
 3. Have a WDS server configured to use ActiveDirectory for boot authorization.
-4. Install this module from the PowershellGallery:
+4. Install this module from the [PowershellGallery](https://www.powershellgallery.com/packages/Cofl.OSDManagement):
 
    ```powershelll
    Install-Module Cofl.OSDManagement
