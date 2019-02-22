@@ -1,2 +1,6 @@
-# Ignore build output
-Release/
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Rr]eleases/
+[Bb]in/
+[Oo]bj/
