@@ -1,6 +1,6 @@
 @{
     RootModule = 'Cofl.OSDManagement.psm1'
-    ModuleVersion = '4.0.1'
+    ModuleVersion = '4.0.2'
     GUID = '0518c5a8-5582-4aaf-a364-19764537a443'
     Author = 'Christian LaCourt'
     Copyright = '(c) 2018 Christian LaCourt.'
