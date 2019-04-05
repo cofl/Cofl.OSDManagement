@@ -26,19 +26,19 @@ function Set-OSDComputerState
     [CmdletBinding(SupportsShouldProcess=$true)]
     [OutputType('OSDComputer')]
     PARAM(
-        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)]
             # A computer object or identity, such as the name, the asset tag, the MAC address, or the object retrieved by Get-OSDComputer.
             [OSDComputerBinding[]]$Identity,
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter()]
             # A task sequence, either a string ID or one retrieved by Get-OSDTaskSequence.
             [ValidateSet('Staged', 'Unstaged')][string]$State,
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter()]
             # If a computer object does not exist in ActiveDirectory, create it.
             [switch]$CreateADComputerIfMissing,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][Alias('OU')]
+        [Parameter()][Alias('OU')]
             # The computer will be created or moved to this OU.
             [string]$OrganizationalUnit,
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter()]
             # If a computer is not the OU (default in the module private data), move it there.
             [switch]$MoveADComputer,
         [Parameter()]

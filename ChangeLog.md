@@ -1,61 +1,5 @@
-@{
-    RootModule = 'Cofl.OSDManagement.psm1'
-    ModuleVersion = '4.0.1'
-    GUID = '0518c5a8-5582-4aaf-a364-19764537a443'
-    Author = 'Christian LaCourt'
-    Copyright = '(c) 2018 Christian LaCourt.'
-    Description = @'
-The Cofl.OSDManagment module for Windows Powershell allows the management of computers in an MDT/Active Directory system coupled with a WDS server set to use Active Directory authorization, and an MSSQL server running the MDT Database.
-
-For more information, please visit the README on the project page.
-'@
-    PowershellVersion = '5.1'
-    DotNetFrameworkVersion = '3.5'
-    TypesToProcess = 'Cofl.OSDManagement-Types.ps1xml'
-    FormatsToProcess = 'Cofl.OSDManagement-Formats.ps1xml'
-    RequiredModules = @(
-        @{
-            ModuleName = 'Configuration'
-            ModuleVersion = '1.3'
-            Guid = 'e56e5bec-4d97-4dfd-b138-abbaa14464a6'
-        },
-        'ActiveDirectory'
-    )
-    FunctionsToExport = @(
-        'Get-OSDComputer'
-        'Get-OSDMakeModel'
-        'Get-OSDTaskSequence'
-        'Connect-OSD'
-        'Disconnect-OSD'
-        'New-OSDComputer'
-        'New-OSDMakeModel'
-        'Remove-OSDComputer'
-        'Remove-OSDMakeModel'
-        'Reset-OSDComputer'
-        'Set-OSDComputer'
-        'Set-OSDComputerState'
-        'Set-OSDMakeModel'
-        'Test-OSDComputer'
-        'Update-OSDAutoCompleteCache'
-        'Update-OSDConfiguration'
-    )
-    PrivateData = @{
-        PSData = @{
-            ProjectURI = 'https://github.com/cofl/Cofl.OSDManagement'
-            LicenseURI = 'https://github.com/cofl/Cofl.OSDManagement/blob/master/LICENSE.md'
-            Tags = @(
-                'MDT'
-                'MicrosoftDeploymentToolkit'
-                'Utility'
-                'PSEdition_Desktop'
-            )
-            ExternalModuleDependencies = @(
-                'Configuration'
-                'ActiveDirectory'
-            )
-            ReleaseNotes = @'
 # 4.0.2
-Removed ValueFromPipelineByPropertyName for all parameters on Set-OSDComputer, Set-OSDComputerState, and Set-OSDMakeModel.
+Removed ValueFromPipelineByPropertyName for all parameters on Set-OSDComputer, Set-OSDComputerState, and Set-OSDMakeModel. It is now possible to pipe Get-OSDComputer into Set-OSDComputer.
 
 # 4.0.1
 Fixed a bug where Get-OSDComputer would throw an error from SQL while trying to get all computers.
@@ -63,6 +7,7 @@ Fixed a bug where Get-OSDComputer would throw an error from SQL while trying to 
 # 4.0.0
 Renamed the module Cofl.OSDManagement and removed references to the old module name.
 Introduced a cleaner workflow.
+
  - Initialize-OSD has been renamed to Connect-OSD
    - The -Path parameter is now mandatory and has the alias MDTSharePath.
    - The -UseConfiguredPath parameter has been added.
@@ -121,7 +66,3 @@ Removed aliases:
  - OSDMakeModel.TS (use OSDMakeModel.TaskSequence)
 Updated Type and Format data:
  - OSDComputer.Name is now OSDComputer.ComputerName in the default display property set.
-'@
-        }
-    }
-}

@@ -25,19 +25,19 @@ function Set-OSDMakeModel
     [CmdletBinding(SupportsShouldProcess=$true)]
     [OutputType('OSDMakeModel')]
     PARAM(
-        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)][Alias('MakeModel')]
+        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)][Alias('MakeModel')]
             # A Make/Model object or identity, such as the model name or the object retrieved by Get-OSDMakeModel.
             [MakeModelBinding]$Model,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNullOrEmpty()]
+        [Parameter()][ValidateNotNullOrEmpty()]
             # A task sequence, either a string ID or one retrieved by Get-OSDTaskSequence.
             [TaskSequenceBinding]$TaskSequence,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNullOrEmpty()]
+        [Parameter()][ValidateNotNullOrEmpty()]
             # A Driver Group for the make/model, usually specified alongside -TaskSequence when the operating system has changed.
             [string]$DriverGroup,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNull()]
+        [Parameter()][ValidateNotNull()]
             # A list of field names to be emptied.
             [string[]]$Clear = @(),
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNull()]
+        [Parameter()][ValidateNotNull()]
             # A table of other values to set.
             [hashtable]$Settings = @{},
         [Parameter()]

@@ -25,31 +25,31 @@ function Set-OSDComputer
     [CmdletBinding(SupportsShouldProcess=$true)]
     [OutputType('OSDComputer')]
     PARAM(
-        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)][Alias('ComputerName')]
+        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)][Alias('ComputerName')]
             # A computer object or identity, such as the name, the asset tag, the MAC address, or the object retrieved by Get-OSDComputer.
             [OSDComputerBinding]$Identity,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNullOrEmpty()]
+        [Parameter()][ValidateNotNullOrEmpty()]
             # The name for a computer.
             [string]$Name,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNullOrEmpty()]
+        [Parameter()][ValidateNotNullOrEmpty()]
             # A task sequence, either a string ID or one retrieved by Get-OSDTaskSequence.
             [TaskSequenceBinding]$TaskSequence,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNullOrEmpty()]
+        [Parameter()][ValidateNotNullOrEmpty()]
             # A Driver Group for the machine, usually specified alonsgide -TaskSequence when the operating system of the override sequence is not the same as the Model default.
             [string]$DriverGroup,
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter()]
             # A MacAddress that will be used for staging the computer.
             [MacAddressBinding]$MacAddress,
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter()]
             # A UUID that will be used for staging the computer.
             [guid]$UUID,
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNull()]
+        [Parameter()][ValidateNotNull()]
             # A list of field names to be emptied. If Name is in this list, the computer name and description will be set to the default name for the computer.
             [string[]]$Clear = @(),
-        [Parameter(ValueFromPipelineByPropertyName=$true)][ValidateNotNull()]
+        [Parameter()][ValidateNotNull()]
             # A table of other values to set. If Name is in this table, the computer name and description will be set to its value.
             [hashtable]$Settings = @{},
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter()]
             # If the computer is staged and the netboot GUID is changed by this operation, update the netboot GUID.
             [switch]$UpdateNetbootGUID,
         [Parameter()]
