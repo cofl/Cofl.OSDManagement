@@ -64,7 +64,7 @@ function Get-OSDComputer
             if($PSCmdlet.PagingParameters.First -gt 0)
             {
                 # Fetch all and convert them
-                $Query = 'select * from ComputerIdentity inner join Settings on (ComputerIdentity.ID=Settings.ID) where Type=''C'' order by ID'
+                $Query = 'select * from ComputerSettings order by ID'
                 if($PSCmdlet.PagingParameters.First -lt [uint64]::MaxValue)
                 {
                     $Query += " offset $($PSCmdlet.PagingParameters.Skip) rows fetch next $($PSCmdlet.PagingParameters.First) rows only"
@@ -86,12 +86,16 @@ function Get-OSDComputer
             {
                 # Fetch all and convert them
                 [hashtable]$SQLParameters = @{}
-                [string]$Query = 'select * from ComputerIdentity inner join Settings on (ComputerIdentity.ID=Settings.ID) where Type=''C'' ' + [string]::Join(' OR ', (0..$($InternalID.Length-1) | Foreach-Object -Process {
+                [string]$Filter = [string]::Join(' OR ', (0..$($InternalID.Length-1) | Foreach-Object -Process {
                     [string]$ParameterName = '@ID{0}' -f $_
                     $SQLParameters.Add($ParameterName, $InternalID[$_])
                     "id=$ParameterName"
-                })) + ' order by ID'
-                $ComputerDictionaries = Invoke-SQLQuery -AsDictionary -Query $Query -Parameters $SQLParameters
+                }))
+                if(![string]::IsNullOrEmpty($Filter))
+                {
+                    $Filter = " where $Filter"
+                }
+                $ComputerDictionaries = Invoke-SQLQuery -AsDictionary -Query "select * from ComputerSettings$Filter order by ID" -Parameters $SQLParameters
                 if($Skipped -lt $PSCmdlet.PagingParameters.Skip)
                 {
                     if(($Skipped + $InternalID.Length) -gt $PSCmdlet.PagingParameters.Skip)

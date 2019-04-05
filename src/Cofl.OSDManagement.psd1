@@ -1,6 +1,6 @@
 @{
     RootModule = 'Cofl.OSDManagement.psm1'
-    ModuleVersion = '4.0.0'
+    ModuleVersion = '4.0.1'
     GUID = '0518c5a8-5582-4aaf-a364-19764537a443'
     Author = 'Christian LaCourt'
     Copyright = '(c) 2018 Christian LaCourt.'
@@ -54,6 +54,9 @@ For more information, please visit the README on the project page.
                 'ActiveDirectory'
             )
             ReleaseNotes = @'
+# 4.0.1
+Fixed a bug where Get-OSDComputer would throw an error from SQL while trying to get all computers.
+
 # 4.0.0
 Renamed the module Cofl.OSDManagement and removed references to the old module name.
 Introduced a cleaner workflow.
