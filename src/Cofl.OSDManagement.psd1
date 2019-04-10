@@ -1,6 +1,6 @@
 @{
     RootModule = 'Cofl.OSDManagement.psm1'
-    ModuleVersion = '4.0.2'
+    ModuleVersion = '4.0.3'
     GUID = '0518c5a8-5582-4aaf-a364-19764537a443'
     Author = 'Christian LaCourt'
     Copyright = '(c) 2018 Christian LaCourt.'
@@ -54,6 +54,12 @@ For more information, please visit the README on the project page.
                 'ActiveDirectory'
             )
             ReleaseNotes = @'
+# 4.0.3
+- Fixed a bug where the MacAddress of a computer could not be updated with Set-OSDComputer.
+- Fixed a bug where a computer with a value of DBNull for the MacAddress could not be accessed or modified.
+- Corrected documentation for `Set-OSDComputerState -State`.
+- Added additional switches `-Staged` and `-Unstaged` to Set-OSDComputerState.
+
 # 4.0.2
 Removed ValueFromPipelineByPropertyName for all parameters on Set-OSDComputer, Set-OSDComputerState, and Set-OSDMakeModel.
 

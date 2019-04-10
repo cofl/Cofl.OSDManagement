@@ -270,7 +270,7 @@ function Set-OSDComputer
 
         if($Settings.ContainsKey('MacAddress') -and ![string]::IsNullOrEmpty($Settings['MacAddress']))
         {
-            $Value = Format-MacAddressForMDT -Address [MacAddressBinding]::new($Settings['MacAddress']).Address
+            $Value = Format-MacAddressForMDT -MacAddress ([MacAddressBinding]::new($Settings['MacAddress'])).Address
             $Settings['MacAddress'] = $Value
             Write-Verbose "Validated MacAddress to ""$($Settings['MacAddress'])""."
         }

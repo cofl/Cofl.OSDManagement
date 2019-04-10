@@ -12,8 +12,21 @@ Updates the ActiveDirectory state of one or more computers, including whether th
 
 ## SYNTAX
 
+### ByState (Default)
 ```
 Set-OSDComputerState [-Identity] <OSDComputerBinding[]> [-State <String>] [-CreateADComputerIfMissing]
+ [-OrganizationalUnit <String>] [-MoveADComputer] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### ByStagedSwitch
+```
+Set-OSDComputerState [-Identity] <OSDComputerBinding[]> [-Staged] [-CreateADComputerIfMissing]
+ [-OrganizationalUnit <String>] [-MoveADComputer] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### ByUnstagedSwitch
+```
+Set-OSDComputerState [-Identity] <OSDComputerBinding[]> [-Unstaged] [-CreateADComputerIfMissing]
  [-OrganizationalUnit <String>] [-MoveADComputer] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -49,6 +62,20 @@ Set-OSDComputerState -Identity 1234 -State Unstaged
 
 Unstage the computer 1234.
 
+### EXAMPLE 4
+```
+Set-OSDComputerState -Identity 1234 -Staged
+```
+
+Stage the computer 1234.
+
+### EXAMPLE 5
+```
+Set-OSDComputerState -Identity 1234 -Unstaged
+```
+
+Unstage the computer 1234.
+
 ## PARAMETERS
 
 ### -Identity
@@ -71,12 +98,42 @@ A task sequence, either a string ID or one retrieved by Get-OSDTaskSequence.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByState
 Aliases:
 
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Staged
+If the computer should be able to PXE boot.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: ByStagedSwitch
+Aliases:
+
+Required: True
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Unstaged
+If the computer should not be able to PXE boot.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: ByUnstagedSwitch
+Aliases:
+
+Required: True
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

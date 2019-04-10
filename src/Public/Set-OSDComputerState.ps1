@@ -20,18 +20,32 @@ Create ActiveDirectory objects for all computers in the MDT database if they don
 .EXAMPLE
 PS C:\> Set-OSDComputerState -Identity 1234 -State Unstaged
 Unstage the computer 1234.
+
+.EXAMPLE
+PS C:\> Set-OSDComputerState -Identity 1234 -Staged
+Stage the computer 1234.
+
+.EXAMPLE
+PS C:\> Set-OSDComputerState -Identity 1234 -Unstaged
+Unstage the computer 1234.
 #>
 function Set-OSDComputerState
 {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess=$true, DefaultParameterSetName='ByState')]
     [OutputType('OSDComputer')]
     PARAM(
         [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)]
             # A computer object or identity, such as the name, the asset tag, the MAC address, or the object retrieved by Get-OSDComputer.
             [OSDComputerBinding[]]$Identity,
-        [Parameter()]
-            # A task sequence, either a string ID or one retrieved by Get-OSDTaskSequence.
+        [Parameter(ParameterSetName='ByState')]
+            # A staging state; Staged if the computer should be able to PXE boot, and unstaged if not.
             [ValidateSet('Staged', 'Unstaged')][string]$State,
+        [Parameter(Mandatory=$true, ParameterSetName='ByStagedSwitch')]
+            # If the computer should be able to PXE boot.
+            [switch]$Staged,
+        [Parameter(Mandatory=$true, ParameterSetName='ByUnstagedSwitch')]
+            # If the computer should not be able to PXE boot.
+            [switch]$Unstaged,
         [Parameter()]
             # If a computer object does not exist in ActiveDirectory, create it.
             [switch]$CreateADComputerIfMissing,
@@ -53,7 +67,7 @@ function Set-OSDComputerState
 
     process
     {
-        if(!($PSBoundParameters.ContainsKey('State') -or $CreateADComputerIfMissing -or $MoveADComputer))
+        if(!($PSBoundParameters.ContainsKey('State') -or $CreateADComputerIfMissing -or $MoveADComputer -or $Staged -or $Unstaged))
         {
             Write-Warning "No state change specified for target(s), skipping Set-OSDComputerState operation."
             return
@@ -93,9 +107,9 @@ function Set-OSDComputerState
                     $ADComputer = Get-ADComputer $ComputerItem.ComputerName
                 }
 
-                if($PSBoundParameters.ContainsKey('State'))
+                if($PSBoundParameters.ContainsKey('State') -or $Staged -or $Unstaged)
                 {
-                    if($State -eq 'Staged')
+                    if($State -eq 'Staged' -or $Staged)
                     {
                         [guid]$NetbootGUID = $ComputerItem.GetValidNetbootGUID()
                         [hashtable]$Property = @{ netbootGUID = $NetbootGUID }

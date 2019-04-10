@@ -21,6 +21,11 @@ class MacAddressBinding
         }
     }
 
+    MacAddressBinding([System.DBNull]$DBNull)
+    {
+        $this.Address = $null
+    }
+
     MacAddressBinding([PhysicalAddress]$PhysicalAddress)
     {
         $this.Address = $PhysicalAddress
