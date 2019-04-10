@@ -1,3 +1,9 @@
+# 4.0.3
+- Fixed a bug where the MacAddress of a computer could not be updated with Set-OSDComputer.
+- Fixed a bug where a computer with a value of DBNull for the MacAddress could not be accessed or modified.
+- Corrected documentation for `Set-OSDComputerState -State`.
+- Added additional switches `-Staged` and `-Unstaged` to Set-OSDComputerState.
+
 # 4.0.2
 Removed ValueFromPipelineByPropertyName for all parameters on Set-OSDComputer, Set-OSDComputerState, and Set-OSDMakeModel. It is now possible to pipe Get-OSDComputer into Set-OSDComputer.
 
