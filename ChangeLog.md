@@ -1,3 +1,6 @@
+# 4.0.4
+- Fixed a formatting issue where OSDComputers would not show their MacAddress
+
 # 4.0.3
 - Fixed a bug where the MacAddress of a computer could not be updated with Set-OSDComputer.
 - Fixed a bug where a computer with a value of DBNull for the MacAddress could not be accessed or modified.

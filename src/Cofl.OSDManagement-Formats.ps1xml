@@ -40,7 +40,7 @@
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                                    if($null -ne $_.MacAddress) { [string]::Format('{0:X2}:{1:X2}:{2:X2}:{3:X2}:{4:X2}:{5:X2}', [object[]]$MacAddress.GetAddressBytes()) }
+                                    if($null -ne $_.MacAddress) { [string]::Format('{0:X2}:{1:X2}:{2:X2}:{3:X2}:{4:X2}:{5:X2}', [object[]]$_.MacAddress.GetAddressBytes()) }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
