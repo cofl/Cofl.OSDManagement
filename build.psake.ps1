@@ -6,6 +6,7 @@ Properties {
     [SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Scope='Function', Target='*')]
     PARAM ()
     # -------- Directories and Basic Properties --------
+    $TestRoot = "$PSScriptRoot/tests"
     $DocsRoot = "$PSScriptRoot/docs"
     $Encoding = [Encoding]::UTF8
 
@@ -138,6 +139,22 @@ Task Sign -depends Catalog -requiredVariables ModuleCatalogPath, Certificate {
     if($SignStatus.Status -ne 'Valid')
     {
         throw "$(psake.context.currentTaskName) - Failed to sign catalog file with certificate ""$($Certificate.GetCertHashString())""."
+    }
+}
+
+Task Test -depends Build -requiredVariables ModuleOutdir,ModuleName,TestRoot {
+    if(!(Get-Module Pester -ListAvailable)){
+        throw "$($psake.context.currentTaskName) - Pester is not available, cannot test module."
+    } else {
+        Import-Module Pester
+    }
+
+    Import-Module "$ModuleOutDir/$ModuleName.psd1" -Force
+    Invoke-Pester -Script $TestRoot | Tee-Object -Variable Result
+    Remove-Module $ModuleName -Force
+    if($Result.TestResult | Where-Object Result -eq 'Failed')
+    {
+        throw "$(psake.context.currentTaskName) - Tests failed."
     }
 }
 
