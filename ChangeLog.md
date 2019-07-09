@@ -1,3 +1,6 @@
+# 4.0.5
+- Fixed the duplicate check in New-OSDMakeModel.
+
 # 4.0.4
 - Fixed a formatting issue where OSDComputers would not show their MacAddress
 

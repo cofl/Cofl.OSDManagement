@@ -35,7 +35,7 @@ function New-OSDMakeModel
 
     process
     {
-        if(@(Get-OSDMakeModel -Model $Model -ErrorAction SilentlyContinue).Count)
+        if(Get-OSDMakeModel -Model $Model -ErrorAction SilentlyContinue)
         {
             throw [InvalidOperationException]::new("Model ""$Model"" already exists.")
         }
