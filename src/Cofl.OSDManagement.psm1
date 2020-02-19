@@ -253,6 +253,7 @@ Register-ArgumentCompleter -CommandName Get-OSDTaskSequence -ParameterName ID -S
 Register-ArgumentCompleter -CommandName New-OSDMakeModel -ParameterName TaskSequence -ScriptBlock $Function:TaskSequenceIDCompleter
 Register-ArgumentCompleter -CommandName Set-OSDComputer -ParameterName TaskSequence -ScriptBlock $Function:TaskSequenceIDCompleter
 Register-ArgumentCompleter -CommandName Set-OSDMakeModel -ParameterName TaskSequence -ScriptBlock $Function:TaskSequenceIDCompleter
+Register-ArgumentCompleter -CommandName Invoke-ReimageComputer -ParameterName TaskSequence -ScriptBlock $Function:TaskSequenceIDCompleter
 
 function TaskSequenceGroupCompleter {
     PARAM ($CommandName, $ParameterName, $WordToComplete, $CommandAst, $FakeBoundParameter)

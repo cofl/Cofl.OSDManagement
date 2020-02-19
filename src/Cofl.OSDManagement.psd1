@@ -1,6 +1,6 @@
 @{
     RootModule = 'Cofl.OSDManagement.psm1'
-    ModuleVersion = '4.0.5'
+    ModuleVersion = '4.0.6'
     GUID = '0518c5a8-5582-4aaf-a364-19764537a443'
     Author = 'Christian LaCourt'
     Copyright = '(c) 2018 Christian LaCourt.'
@@ -27,6 +27,7 @@ For more information, please visit the README on the project page.
         'Get-OSDTaskSequence'
         'Connect-OSD'
         'Disconnect-OSD'
+        'Invoke-ReimageComputer'
         'New-OSDComputer'
         'New-OSDMakeModel'
         'Remove-OSDComputer'
@@ -54,6 +55,9 @@ For more information, please visit the README on the project page.
                 'ActiveDirectory'
             )
             ReleaseNotes = @'
+# 4.0.6
+- Added Invoke-ReimageComputer
+
 # 4.0.5
 - Fixed the duplicate check in New-OSDMakeModel.
 
