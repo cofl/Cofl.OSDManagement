@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: Cofl.OSDManagement-help.xml
 Module Name: Cofl.OSDManagement
 online version:
@@ -40,21 +40,6 @@ Stage the computer 1234, creating it if it doesn't exist, then remotely invoke a
 
 ## PARAMETERS
 
-### -CreateADComputerIfMissing
-If a computer object does not exist in ActiveDirectory, create it.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Identity
 A computer object or identity, such as the name, the asset tag, the MAC address, or the object retrieved by Get-OSDComputer.
 
@@ -70,8 +55,8 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -MoveADComputer
-If a computer is not the OU (default in the module private data), move it there.
+### -CreateADComputerIfMissing
+If a computer object does not exist in ActiveDirectory, create it.
 
 ```yaml
 Type: SwitchParameter
@@ -100,8 +85,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Pass through an updated copy of the computer.
+### -MoveADComputer
+If a computer is not the OU (default in the module private data), move it there.
 
 ```yaml
 Type: SwitchParameter
@@ -130,17 +115,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -PassThru
+Pass through an updated copy of the computer.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -153,6 +138,21 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
