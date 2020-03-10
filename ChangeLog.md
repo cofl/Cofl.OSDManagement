@@ -1,3 +1,10 @@
+# 4.0.7
+- Broadened the regex `Invoke-ReimageComputer` uses to search for network boot devices.
+- Added some error handling to `Invoke-ReimageComputer`
+
+# 4.0.6
+- Added `Invoke-ReimageComputer`
+
 # 4.0.5
 - Fixed the duplicate check in New-OSDMakeModel.
 
