@@ -58,22 +58,37 @@ function Invoke-ReimageComputer
             }
             if($PSCmdlet.ShouldProcess($ComputerItem.ComputerName))
             {
-                if($PSBoundParameters.ContainsKey('TaskSequence'))
-                {
-                    Set-OSDComputer -Identity $ComputerItem -TaskSequence $TaskSequence -Verbose:$VerbosePreference
+                $BootDevice = Invoke-Command -ComputerName $ComputerItem.ComputerName -ScriptBlock {
+                    # Matches the guid of the LAN device: this is either "UEFI: IP(V)4" something-or-other, or "PCI LAN", or
+                    # IP4 or IPv4 on the description line
+                    if("$(bcdedit /enum ALL)" -match '({[^}]+})\s*description\s+(?:UEFI:\s+IP\S*4|PCI LAN\b|[^\r\n]*IPv?4)')
+                    {
+                        $Matches[1]
+                    } else
+                    {
+                        $null
+                    }
                 }
-                Set-OSDComputerState -State Staged -Identity $ComputerItem -Verbose:$VerbosePreference -CreateADComputerIfMissing
-
-                Invoke-Command -ComputerName $ComputerItem.ComputerName -ScriptBlock {
-                    # Matches the guid of the LAN device: this is either "UEFI: IP(V)4" something-or-other, or "PCI LAN"
-                    $null = "$(bcdedit /enum ALL)" -match '({[^}]+})\s*description\s+(?:UEFI:\s+IP\S*4|PCI LAN\b)'
-                    bcdedit /default $Matches[1]
-                    bcdedit /set '{fwbootmgr}' BOOTSEQUENCE '{default}'
-                } -Verbose:$VerbosePreference | Write-Verbose
-                $null = Restart-Computer -ComputerName $ComputerItem.ComputerName -Verbose:$VerbosePreference
-                if($PassThru)
+                if(!$BootDevice)
                 {
-                    Get-OSDComputer -InternalID $ComputerItem.InternalID
+                    Write-Error -Message "Could not identify network boot device for $ComputerItem" -ErrorAction $ErrorActionPreference
+                } else
+                {
+                    if($PSBoundParameters.ContainsKey('TaskSequence'))
+                    {
+                        Set-OSDComputer -Identity $ComputerItem -TaskSequence $TaskSequence -Verbose:$VerbosePreference
+                    }
+                    Set-OSDComputerState -State Staged -Identity $ComputerItem -Verbose:$VerbosePreference -CreateADComputerIfMissing
+
+                    Invoke-Command -ComputerName $ComputerItem.ComputerName -ScriptBlock {
+                        bcdedit /default $args[0]
+                        bcdedit /set '{fwbootmgr}' BOOTSEQUENCE '{default}'
+                    } -Verbose:$VerbosePreference -ArgumentList $BootDevice | Write-Verbose
+                    $null = Restart-Computer -ComputerName $ComputerItem.ComputerName -Verbose:$VerbosePreference
+                    if($PassThru)
+                    {
+                        Get-OSDComputer -InternalID $ComputerItem.InternalID
+                    }
                 }
             }
         }
