@@ -1,3 +1,6 @@
+# 4.0.8
+- Added the -ForceRestart flag to `Invoke-ReimageComputer`.
+
 # 4.0.7
 - Broadened the regex `Invoke-ReimageComputer` uses to search for network boot devices.
 - Added some error handling to `Invoke-ReimageComputer`

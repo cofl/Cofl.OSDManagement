@@ -38,6 +38,9 @@ function Invoke-ReimageComputer
             # A task sequence, either a string ID or one retrieved by Get-OSDTaskSequence.
             [TaskSequenceBinding]$TaskSequence,
         [Parameter()]
+            # Force the remote computer to restart, even if someone is logged on.
+            [switch]$ForceRestart,
+        [Parameter()]
             # Pass through an updated copy of the computer.
             [switch]$PassThru
     )
@@ -84,7 +87,7 @@ function Invoke-ReimageComputer
                         bcdedit /default $args[0]
                         bcdedit /set '{fwbootmgr}' BOOTSEQUENCE '{default}'
                     } -Verbose:$VerbosePreference -ArgumentList $BootDevice | Write-Verbose
-                    $null = Restart-Computer -ComputerName $ComputerItem.ComputerName -Verbose:$VerbosePreference
+                    $null = Restart-Computer -ComputerName $ComputerItem.ComputerName -Force:$ForceRestart -Verbose:$VerbosePreference
                     if($PassThru)
                     {
                         Get-OSDComputer -InternalID $ComputerItem.InternalID
