@@ -1,6 +1,6 @@
 @{
     RootModule = 'Cofl.OSDManagement.psm1'
-    ModuleVersion = '4.0.8'
+    ModuleVersion = '4.0.9'
     GUID = '0518c5a8-5582-4aaf-a364-19764537a443'
     Author = 'Christian LaCourt'
     Copyright = '(c) 2018 Christian LaCourt.'
@@ -55,6 +55,9 @@ For more information, please visit the README on the project page.
                 'ActiveDirectory'
             )
             ReleaseNotes = @'
+# 4.0.9
+- Added support for Lenovo ThinkPad X13 Yoga laptops to `Invoke-ReimageComputer`.
+
 # 4.0.8
 - Added the -ForceRestart flag to `Invoke-ReimageComputer`.
 

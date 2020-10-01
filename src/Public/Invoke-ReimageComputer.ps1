@@ -64,7 +64,7 @@ function Invoke-ReimageComputer
                 $BootDevice = Invoke-Command -ComputerName $ComputerItem.ComputerName -ScriptBlock {
                     # Matches the guid of the LAN device: this is either "UEFI: IP(V)4" something-or-other, or "PCI LAN", or
                     # IP4 or IPv4 on the description line
-                    if("$(bcdedit /enum ALL)" -match '({[^}]+})\s*description\s+(?:UEFI:\s+IP\S*4|PCI LAN\b|[^\r\n]*IPv?4)')
+                    if("$(bcdedit /enum ALL)" -match '({[^}]+})\s*description\s+(?:UEFI:\s+IP\S*4|PCI LAN\b|[^\r\n]*IPv?4|PXE BOOT\b)')
                     {
                         $Matches[1]
                     } else
