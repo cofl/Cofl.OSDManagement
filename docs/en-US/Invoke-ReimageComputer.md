@@ -14,8 +14,8 @@ Remotely invoke a reboot to a network adapter.
 
 ```
 Invoke-ReimageComputer [-Identity] <OSDComputerBinding[]> [-CreateADComputerIfMissing]
- [-OrganizationalUnit <String>] [-MoveADComputer] [-TaskSequence <TaskSequenceBinding>] [-PassThru] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-OrganizationalUnit <String>] [-MoveADComputer] [-TaskSequence <TaskSequenceBinding>] [-ForceRestart]
+ [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -111,6 +111,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ForceRestart
+Force the remote computer to restart, even if someone is logged on.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
